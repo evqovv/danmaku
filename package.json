@@ -1,0 +1,23 @@
+{
+  "name": "@evqovv/danmaku",
+  "version": "1.0.0",
+  "description": "A simple danmaku library.",
+  "keywords": [
+    "danmaku"
+  ],
+  "homepage": "https://github.com/evqovv/danmaku#readme",
+  "bugs": {
+    "url": "https://github.com/evqovv/danmaku/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evqovv/danmaku.git"
+  },
+  "license": "ISC",
+  "author": "evqovv",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12"
+  }
+}
