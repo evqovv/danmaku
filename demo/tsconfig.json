@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"outDir": "./dist",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"declaration": true,
+		"baseUrl": "..",
+		"paths": {
+			"@danmaku/*": [
+				"src/*"
+			]
+		},
+		"lib": [
+			"esnext",
+			"dom"
+		],
+		"target": "esnext"
+	},
+	"include": [
+		"./src/**/*"
+	]
+}
