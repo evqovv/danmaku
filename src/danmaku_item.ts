@@ -9,6 +9,7 @@ export interface DanmakuOptions {
 	loop: boolean;
 	direction: DanmakuDirection;
 	node: Node[];
+	clone_node: boolean;
 }
 
 export type DanmakuStatus = 'idle' | 'running' | 'paused';
@@ -24,7 +25,7 @@ export default class DanmakuItem {
 		this.duration = options.duration;
 		this.direction = options.direction;
 		for (const node of options.node) {
-			this.node.appendChild(node);
+			this.node.appendChild(options.clone_node ? node.cloneNode(true) : node);
 		}
 		this.node.addEventListener('transitionend', () => this.plugin_system.lifecycle.end.emit(this));
 	}
