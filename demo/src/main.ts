@@ -1,8 +1,21 @@
 import { DanmakuAlignment } from "@danmaku/danmaku_engine";
 import { DanmakuOptions } from "@danmaku/danmaku_item";
-import DanmakuManager, { ManagerOptions } from "@danmaku/danmaku_manager";
-import { next_frame } from "@danmaku/utils";
-import { load_font, load_text, random_duration, to_px, to_px_value } from "./utils";
+import DanmakuManager from "@danmaku/danmaku_manager";
+import { load_text, random_duration, to_px, to_px_value } from "./utils";
+
+const prefix_img = document.createElement('img');
+prefix_img.src = "./assets/orihime.jpg";
+prefix_img.style.display = "inline-block";
+prefix_img.style.maxHeight = to_px('8vh');
+await prefix_img.decode();
+
+function create_danmaku(text: string): [HTMLImageElement, HTMLSpanElement] {
+	const span = document.createElement('span');
+	span.textContent = text;
+	span.style.marginLeft = '8px';
+
+	return [prefix_img, span];
+}
 
 async function get_danmaku(): Promise<DanmakuOptions[]> {
 	const ret: DanmakuOptions[] = [];
@@ -10,12 +23,15 @@ async function get_danmaku(): Promise<DanmakuOptions[]> {
 	for (const text of list) {
 		ret.push({
 			duration: random_duration(7000, 14000),
-			node: [document.createTextNode(text)],
+			node: create_danmaku(text),
 			style: {
 				fontSize: to_px('3vh'),
 				fontWeight: 'bold',
 				color: '#fff7ea',
-				maxHeight: to_px('8vh'),
+				maxHeight: to_px('10vh'),
+				border: "3px solid yellow",
+				borderRadius: "8px",
+				padding: "8px 16px",
 			},
 			loop: true,
 			direction: 'to_left',
@@ -25,7 +41,6 @@ async function get_danmaku(): Promise<DanmakuOptions[]> {
 	return ret;
 }
 
-
 async function main() {
 	const container: HTMLElement | null = document.querySelector('#danmaku-container');
 	if (!container) {
@@ -33,7 +48,7 @@ async function main() {
 	}
 
 	const manager = new DanmakuManager({
-		track_height: to_px_value('8vh'),
+		track_height: to_px_value('10vh'),
 		min_horizontal_gap: to_px_value('3vh'),
 		min_vertical_gap: to_px_value('4vh'),
 		max_launch_count_per_tick: 16,
