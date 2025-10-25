@@ -6,7 +6,7 @@ import { load_text, random_duration, to_px, to_px_value } from "./utils";
 const prefix_img = document.createElement('img');
 prefix_img.src = "./assets/orihime.jpg";
 prefix_img.style.display = "inline-block";
-prefix_img.style.maxHeight = to_px('8vh');
+prefix_img.style.maxHeight = to_px('6vh');
 await prefix_img.decode();
 
 function create_danmaku(text: string): [HTMLImageElement, HTMLSpanElement] {
@@ -41,7 +41,7 @@ async function get_danmaku(): Promise<DanmakuOptions[]> {
 	return ret;
 }
 
-async function main() {
+async function main(): Promise<void> {
 	const container: HTMLElement | null = document.querySelector('#danmaku-container');
 	if (!container) {
 		throw new Error("Danmaku container doesn't exist.");
@@ -57,10 +57,15 @@ async function main() {
 		interval: 100,
 	});
 
+	const ro = new ResizeObserver(() => manager.resize());
+	ro.observe(document.body);
+
 	manager.mount(container);
 	manager.push(await get_danmaku());
 	manager.start_render();
 	await manager.until_all_done();
+	manager.unmount();
+	ro.disconnect();
 }
 
 await main();
