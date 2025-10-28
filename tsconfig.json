@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "moduleDetection": "force",
+        "skipDefaultLibCheck": true,
+        "declaration": true,
+        "declarationDir": "./dist",
+        "emitDeclarationOnly": true,
+        "lib": [
+            "esnext",
+            "dom"
+        ],
+        "target": "esnext"
+    },
+    "include": [
+        "./src"
+    ],
+    "exclude": [
+        "./node_modules",
+        "./dist",
+        "./demo"
+    ]
+}
