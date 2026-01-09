@@ -36,7 +36,9 @@ export default class DanmakuItem {
         }
         this.recorder.start_time = now();
         this.set_style('transition', `transform ${this.duration}ms linear`);
-        this.set_style('transform', `translateX(${this.destination}px)`);
+        next_frame(() =>
+            this.set_style('transform', `translateX(${this.destination}px)`)
+        );
         this.status = 'running';
         this.plugin_system.lifecycle.start.emit(this);
     }
